@@ -11,3 +11,15 @@ We start by loading our data. The `Read10X()` function reads the output from 10X
 If your Cell Ranger output is in the newer .h5 file format, you can use `Read10X_h5()` instead to read the data into Seurat.
 
 Next, we use this count matrix to create a **Seurat object**. Think of this object as a container that holds both your data (like the count matrix) and your analysis results (like PCA or clustering). Everything for a single-cell dataset is stored in this object, making it easy to work with.
+
+```r
+library(dplyr)
+library(Seurat)
+library(patchwork)
+
+# Load the PBMC dataset
+pbmc.data <- Read10X(data.dir = "/path/to/filtered_gene_bc_matrices/hg19/")
+# Initialize the Seurat object with the raw (non-normalized data).
+pbmc <- CreateSeuratObject(counts = pbmc.data, project = "pbmc3k", min.cells = 3, min.features = 200)
+pbmc
+```
